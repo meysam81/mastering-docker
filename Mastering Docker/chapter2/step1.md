@@ -11,3 +11,9 @@ docker build -t greeter .
 ```bash
 docker run --rm --name greeter -dp 8000:8000 greeter
 ```{{exec}}
+
+## Send HTTP request
+
+```bash
+curl localhost:8000
+```{{exec}}

@@ -1,13 +1,13 @@
 {
-  "title": "Build Docker Image",
-  "description": "Build a Docker image from a Dockerfile",
+  "title": "Chapter 1. Intro",
+  "description": "Introduction to Docker",
   "details": {
     "intro": {
       "text": "intro.md"
     },
     "steps": [
       {
-        "title": "Build a Docker image",
+        "title": "Check Docker version",
         "text": "step1.md"
       }
     ],
