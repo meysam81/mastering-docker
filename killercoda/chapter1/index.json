@@ -8,18 +8,11 @@
     "steps": [
       {
         "title": "Build a Docker image",
-        "text": "step1.md",
-        "verify": "verify.sh"
+        "text": "step1.md"
       }
     ],
     "finish": {
       "text": "finish.md"
-    },
-    "assets": {
-      "host01": [
-        { "file": "../../chapter2/greeter/Dockerfile", "target": "~/" },
-        { "file": "../../chapter2/greeter/main.py", "target": "~/" }
-      ]
     }
   },
   "backend": {
