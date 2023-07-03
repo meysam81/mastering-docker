@@ -1,0 +1,28 @@
+{
+  "title": "Build Docker Image",
+  "description": "Build a Docker image from a Dockerfile",
+  "details": {
+    "intro": {
+      "text": "intro.md"
+    },
+    "steps": [
+      {
+        "title": "Build a Docker image",
+        "text": "step1.md",
+        "verify": "verify.sh"
+      }
+    ],
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {
+      "host01": [
+        { "file": "../../chapter2/greeter/Dockerfile", "target": "~/" },
+        { "file": "../../chapter2/greeter/main.py", "target": "~/" }
+      ]
+    }
+  },
+  "backend": {
+    "imageid": "ubuntu"
+  }
+}
