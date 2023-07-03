@@ -1,22 +1,19 @@
 {
-  "title": "Chapter 2. Build Docker Image",
-  "description": "Build a Docker image from a Dockerfile",
+  "title": "Chapter 2.2. Pull and run Nginx",
+  "description": "Pull Nginx Docker image and run it",
   "details": {
     "intro": {
       "text": "intro.md"
     },
     "steps": [
       {
-        "title": "Build a Docker image",
+        "title": "Pull and run Nginx",
         "text": "step1.md",
         "verify": "verify.sh"
       }
     ],
     "finish": {
       "text": "finish.md"
-    },
-    "assets": {
-      "host01": [{ "file": "*", "target": "~/" }]
     }
   },
   "backend": {
