@@ -1,5 +1,5 @@
 {
-  "title": "Build Docker Image",
+  "title": "Chapter 2. Build Docker Image",
   "description": "Build a Docker image from a Dockerfile",
   "details": {
     "intro": {
