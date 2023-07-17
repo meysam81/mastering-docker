@@ -6,6 +6,6 @@ COPY requirements.txt /
 
 RUN pip install -r /requirements.txt -U pip
 
-COPY *.py ./
+COPY *.py Procfile ./
 
-CMD ["python", "main.py"]
+CMD ["honcho", "start"]
