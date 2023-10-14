@@ -19,5 +19,5 @@ just generate-certificates-step
 ## Run the Docker Daemon
 
 ```bash
-just rund-dockerd
+just run-dockerd
 ```
