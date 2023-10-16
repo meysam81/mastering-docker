@@ -162,3 +162,5 @@ cython_debug/
 
 celerybeat*
 chapter8/tls-encrypted-authentication/certs
+
+secrets

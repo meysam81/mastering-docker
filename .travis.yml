@@ -1,0 +1,17 @@
+language: minimal
+
+services:
+  - docker
+
+env:
+  global:
+    - DOCKER_IMAGE_NAME=meysam81/mastering-docker-chapter9-nginx-travis
+
+before_script:
+  - echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+
+script:
+  - cd chapter9/github-actions
+  - export COMMIT_SHA=$(git log -1 --pretty=format:%h)
+  - docker build -t $DOCKER_IMAGE_NAME:$COMMIT_SHA .
+  - docker push $DOCKER_IMAGE_NAME:$COMMIT_SHA
