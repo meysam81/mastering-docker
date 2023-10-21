@@ -21,12 +21,11 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        arch: [arm64, x64]
+        platform: [linux/amd64, linux/arm64, darwin/amd64, darwin/arm64]
         os: [ubuntu-latest, macos-latest]
       fail-fast: false
     env:
       IMAGE_NAME: meysam81/mastering-docker-chapter9-nginx
-      DOCKER_CLI_AARCH64: 1
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -59,14 +58,20 @@ jobs:
       - id: sha
         name: Calculate short SHA
         run: echo "sha=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
+      - id: tag
+        name: Tag
+        run: |
+          tag=$( echo ${{ matrix.platform }} | sed 's/\//-/g' )
+          echo "tag=${tag}" >> $GITHUB_OUTPUT
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           context: chapter9/github-actions
           labels: ${{ steps.meta.outputs.labels }}
+          platforms: ${{ matrix.platform }}
           push: ${{ github.ref == 'refs/heads/main' }}
           tags: |
-            ${{ env.IMAGE_NAME }}:${{ steps.sha.outputs.sha }}-${{ matrix.os }}-${{ matrix.arch }}
-            ${{ env.IMAGE_NAME }}:latest-${{ matrix.os }}-${{ matrix.arch }}
-            ghcr.io/${{ env.IMAGE_NAME }}:${{ steps.sha.outputs.sha }}-${{ matrix.os }}-${{ matrix.arch }}
-            ghcr.io/${{ env.IMAGE_NAME }}:latest-${{ matrix.os }}-${{ matrix.arch }}
+            ${{ env.IMAGE_NAME }}:${{ steps.sha.outputs.sha }}-${{ steps.tag.outputs.tag }}
+            ${{ env.IMAGE_NAME }}:latest-${{ steps.tag.outputs.tag }}
+            ghcr.io/${{ env.IMAGE_NAME }}:${{ steps.sha.outputs.sha }}-${{ steps.tag.outputs.tag }}
+            ghcr.io/${{ env.IMAGE_NAME }}:latest-${{ steps.tag.outputs.tag }}
