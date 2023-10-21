@@ -22,25 +22,24 @@ jobs:
     strategy:
       matrix:
         arch: [arm64, x64]
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest, macos-latest]
       fail-fast: false
     env:
       IMAGE_NAME: meysam81/mastering-docker-chapter9-nginx
-      DOCKER_CLI_AARCH64: /usr/bin/docker
+      DOCKER_CLI_AARCH64: 1
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - if: matrix.os == 'ubuntu-latest'
-        name: Set up QEMU
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
-      - if: matrix.os == 'ubuntu-latest'
-        name: Set up Docker Buildx
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Setup Docker
         if: matrix.os == 'macos-latest'
         run: |
           brew install docker
           colima start
+          docker context use colima
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
