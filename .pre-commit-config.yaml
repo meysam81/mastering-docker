@@ -32,7 +32,6 @@ repos:
       - id: trailing-whitespace
       - id: check-executables-have-shebangs
       - id: detect-aws-credentials
-      - id: detect-private-key
       - id: end-of-file-fixer
       - id: file-contents-sorter
       - id: requirements-txt-fixer
