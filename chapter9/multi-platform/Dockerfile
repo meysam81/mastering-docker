@@ -1,11 +1,9 @@
-FROM multiarch/crossbuild
+FROM --platform=$BUILDPLATFORM busybox
 
-ARG CROSS_TRIPLE
-WORKDIR /workdir/
-COPY main.c .
+ARG TARGETOS
+ARG TARGETARCH
 
-ENV CROSS_TRIPLE=${CROSS_TRIPLE}
+ENV TARGETOS=$TARGETOS
+ENV TARGETARCH=$TARGETARCH
 
-RUN crossbuild gcc -o main main.c
-
-CMD ["./main"]
+CMD ["sh", "-c", "echo Hello $TARGETOS/$TARGETARCH"]

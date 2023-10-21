@@ -62,18 +62,10 @@ jobs:
   chapter9-multiplatform:
     env:
       IMAGE_NAME: meysam81/mastering-docker-chapter9-multiplatform
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        include:
-          - target: x86_64-linux-gnu
-            tag: amd64
-          - target: aarch64-linux-gnu
-            tag: arm64
-          - target: x86_64-apple-darwin
-            tag: darwin
-          - target: x86_64-w64-mingw32
-            tag: windows
+        os: [ubuntu-latest, macos-latest]
       fail-fast: false
     steps:
       - name: Checkout
@@ -106,11 +98,10 @@ jobs:
         with:
           context: chapter9/multi-platform
           labels: ${{ steps.meta.outputs.labels }}
-          build-args: |
-            CROSS_TRIPLE=${{ matrix.target }}
+          platforms: linux/amd64,linux/arm64
           push: ${{ github.ref == 'refs/heads/main' }}
           tags: |
-            ${{ env.IMAGE_NAME }}:${{ steps.sha.outputs.sha }}-${{ matrix.tag }}
-            ${{ env.IMAGE_NAME }}:latest-${{ matrix.tag }}
-            ghcr.io/${{ env.IMAGE_NAME }}:${{ steps.sha.outputs.sha }}-${{ matrix.tag }}
-            ghcr.io/${{ env.IMAGE_NAME }}:latest-${{ matrix.tag }}
+            ${{ env.IMAGE_NAME }}:${{ steps.sha.outputs.sha }}-${{ matrix.os }}
+            ${{ env.IMAGE_NAME }}:latest-${{ matrix.os }}
+            ghcr.io/${{ env.IMAGE_NAME }}:${{ steps.sha.outputs.sha }}-${{ matrix.os }}
+            ghcr.io/${{ env.IMAGE_NAME }}:latest-${{ matrix.os }}
