@@ -104,7 +104,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: chapter9/github-actions
+          context: chapter9/multi-platform
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             CROSS_TRIPLE=${{ matrix.target }}
