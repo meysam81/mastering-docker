@@ -124,9 +124,9 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: ${{ matrix.image }}:${{ env.IMAGE_TAG }}
-          output: "trivy-report.sarif"
+          output: trivy-report.sarif
           trivy-config: trivy.yaml
-      - if: always()
+      - if: failure()
         name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
         with:
