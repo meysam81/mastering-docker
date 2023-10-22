@@ -6,6 +6,7 @@ format: table
 insecure: false
 quiet: false
 severity:
+  - MEDIUM
   - HIGH
   - CRITICAL
 timeout: 1m
