@@ -1,0 +1,16 @@
+cache:
+  dir: .pre-commit-trivy-cache
+debug: false
+exit-code: 1
+format: table
+insecure: false
+quiet: false
+severity:
+  - HIGH
+  - CRITICAL
+timeout: 1m
+vulnerability:
+  ignore-unfixed: true
+  type:
+    - os
+    - library
