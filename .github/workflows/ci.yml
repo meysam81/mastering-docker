@@ -116,19 +116,6 @@ jobs:
             ${{ env.IMAGE_NAME }}:latest
             ghcr.io/${{ env.IMAGE_NAME }}:${{ steps.sha.outputs.sha }}
             ghcr.io/${{ env.IMAGE_NAME }}:latest
-      - name: Sign image with a key
-        run: |
-          cosign sign --yes --key env://COSIGN_PRIVATE_KEY "${TAGS}@${DIGEST}"
-        env:
-          TAGS: ${{ steps.meta.outputs.tags }}
-          COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
-          COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
-          DIGEST: ${{ steps.build-push.outputs.digest }}
-      - name: Sign the images with GitHub OIDC Token
-        env:
-          DIGEST: ${{ steps.build-push.outputs.digest }}
-          TAGS: ${{ steps.meta.outputs.tags }}
-        run: cosign sign --yes "${TAGS}@${DIGEST}"
 
   image-scan:
     env:
